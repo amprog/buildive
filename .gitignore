@@ -1,5 +1,4 @@
 node_modules
-docs
 *.log
 .npm
 .DS_Store
@@ -8,4 +7,6 @@ docs
 .dropbox.cache
 .Trash-*
 .sass-cache
-.env
+*.env
+*.xls
+*.xlsx
