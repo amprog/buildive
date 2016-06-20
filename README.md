@@ -1,6 +1,6 @@
 # Buildive: An Interactive Build Template
 
-## Getting Started
+### Getting Started
 A dead simple template for building interactives. All build tasks are handled with [npm](https://github.com/npm/npm) scripts inside `package.json`. Source files are kept in src/ while build files are kept in public/. To keep things tidy and modular, this template is designed with [Browserify](https://github.com/substack/node-browserify#usage), [Sass](https://github.com/sass/sass) and [Mustache](https://github.com/janl/mustache.js/) in mind and has a directory structure meant to reinforce modular code.
 
 ### Build Setup
@@ -28,9 +28,14 @@ export STAGE_IP="[IP address of staging server]"
 - @import .scss files into `src/sass/index.scss`
 - Using mustache's partials syntax (`{{> partial_name }}`), add partials to `src/views/index.mustache` (note: partials must have a unique filenames across `partials/` and have .mustache extension)
 
-### Build:
-  - `npm run build`
-  - push to staging server: `npm run push-stage`.
+### Build
+- `npm run build`
+
+### Push Updates
+
+- for testing and sharing internally, use npm `preview` scripts which copy files to `/preview/2016/` on staging server, outside of the git working tree: `npm run preview:push`
+  - *note:* the preview directory will maintain versions (e.g `/previews/2016/buildive/v1.0.1/`)
+- when ready to push to production: `npm run stage:push`
 
 ## Interactive styling
 
@@ -64,10 +69,13 @@ export STAGE_IP="[IP address of staging server]"
 | `npm start` | watch files, livereload, start server at `public/`. Does not minify. |
 | `npm run connect` | start server at `public/` |
 | `npm run build` | for production-ready codes, adds minification |
-| `npm run connect-stage` | connect to staging server via ssh (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
 | `npm run preview:push` | copies `public/` to staging server to a folder in `interactives/preview/2016/version/` with the package's name (e.g interactives/preview/2016/buildive/v1.0.0/), to use a different directory, change the `previewDir` config in `package.json` (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
 | `npm run preview:push:patch` | same as preview:push except runs `npm version patch` |
 | `npm run preview:open` | open most recent preview in browser |
+| `npm run stage:connect` | connect to staging server via ssh (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
+| `npm run stage:push` | push update to staging directory (default: projects/2016 ) |
+| `npm run stage:commit` | commit staging changes to git |
+| `npm run stage:open` | preview stage in browser |
 | `npm run watch` | watch js and sass files |
 | `npm run browserify` | build js files |
 | `npm run sass` | build sass files |
