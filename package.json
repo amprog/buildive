@@ -1,13 +1,12 @@
 {
-  "name": "_buildive",
+  "name": "buildive",
   "version": "1.0.1",
   "description": "generic interactive build tool",
   "keywords": [],
   "main": "src/js/index.js",
   "config": {
     "previewDir": "preview/2016",
-    "stageDir": "projects/2016",
-    "testDir": "/Users/alomax/Dropbox/cap"
+    "stageDir": "projects/2016"
   },
   "scripts": {
     "start": "npm run watch & npm run livereload & npm run connect",
@@ -28,7 +27,7 @@
     "preview:open": "open https://interactives-stage.devprogress.org/$npm_package_config_previewDir/$npm_package_name/v$npm_package_version/",
     "stage:connect": "ssh -i $RSA_KEY $STAGE_NAME@$STAGE_IP",
     "stage:push": "scp -i $RSA_KEY -r public/ $STAGE_NAME@$STAGE_IP:/var/www/interactives/$npm_package_config_stageDir/$npm_package_name/",
-    "stage:commit": "git add $npm_package_config_testDir/$npm_package_name && git commit -m \"v$npm_package_version update\""
+    "stage:commit": "npm run stage:connect -- 'cd /var/www/interactives ; git add $npm_package_config_stageDir/$npm_package_name ; git commit -m \"$npm_package_name v$npm_package_version\"'"
   },
   "author": "Andrew Lomax",
   "license": "ISC",
