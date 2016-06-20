@@ -28,7 +28,7 @@
     "preview:open": "open https://interactives-stage.devprogress.org/$npm_package_config_previewDir/$npm_package_name/v$npm_package_version/",
     "stage:connect": "ssh -i $RSA_KEY $STAGE_NAME@$STAGE_IP",
     "stage:push": "scp -i $RSA_KEY -r public/ $STAGE_NAME@$STAGE_IP:/var/www/interactives/$npm_package_config_stageDir/$npm_package_name/",
-    "stage:commit": "git add $npm_package_config_testDir/$npm_package_name && git commit -m 'v$npm_package_version update'"
+    "stage:commit": "git add $npm_package_config_testDir/$npm_package_name && git commit -m \"v$npm_package_version update\""
   },
   "author": "Andrew Lomax",
   "license": "ISC",
