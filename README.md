@@ -6,17 +6,17 @@ A dead simple template for building interactives. All build tasks are handled wi
 ### Build Setup
 - make sure you have [node and the latest npm](https://docs.npmjs.com/getting-started/installing-node) installed
 - clone this repo: `git clone https://github.com/amprog/buildive.git`
-- define the following as environment variables:
+- define the following as environment variables `nano ~/.bash_profile` (you'll need to ge the RSA KEY, username and state IP address from webtech):
 ```
 export RSA_KEY="[path/to/rsa/key]"
 export STAGE_NAME="[username for servers]"
 export STAGE_IP="[IP address of staging server]"
 ```
-- *(optional)* Install all development dependencies globally on machine to keep the node_modules directory smaller: `npm install -g browserify uglify-js watchify minifier node-sass http-server livereload watch`, otherwise run `npm install` during Project Setup
+- Install all development dependencies globally on machine to make their CLI available: `npm install -g browserify uglify-js watchify minifier node-sass http-server livereload watch`
 - Set up bash build script for convenience: `cp buildive /usr/local/bin/`
 
 ### Project Setup
-- run `buildive <interactive name>`
+- run `buildive <interactive_name>`
 - Open `package.json` and change name, description, keyword, staging directory
 - Edit the `meta` object in `package.json`. This data is used in the default `header.mustache` template.
 - run `npm install` if you did not install development dependencies globally
@@ -29,13 +29,15 @@ export STAGE_IP="[IP address of staging server]"
 - Using mustache's partials syntax (`{{> partial_name }}`), add partials to `src/views/index.mustache` (note: partials must have a unique filenames across `partials/` and have .mustache extension)
 
 ### Build
-- `npm run build`
+- for production-ready builds: `npm run build`
 
 ### Push Updates
 
 - for testing and sharing internally, use npm `preview` scripts which copy files to `/preview/2016/` on staging server, outside of the git working tree: `npm run preview:push`
   - *note:* the preview directory will maintain versions (e.g `/previews/2016/buildive/v1.0.1/`)
-- when ready to push to production: `npm run stage:push`
+- when ready to push to production after building: `npm run stage:push`
+
+The current process for going live with interactives is to load files to the staging server (you can do this manually via FTP using CyberDuck or Filezilla, if you prefer or just run `npm run stage:push`), then adding the changes to the git repo on the staging server (`npm run stage:commit` or ssh into staging server and add it manually with git). You then put in a request to webtech via Slack, and someone on the team will pull down your changes onto the production interactive server.
 
 ## Interactive styling
 
@@ -68,12 +70,12 @@ export STAGE_IP="[IP address of staging server]"
 |---|---|
 | `npm start` | watch files, livereload, start server at `public/`. Does not minify. |
 | `npm run connect` | start server at `public/` |
-| `npm run build` | for production-ready codes, adds minification |
-| `npm run preview:push` | copies `public/` to staging server to a folder in `interactives/preview/2016/version/` with the package's name (e.g interactives/preview/2016/buildive/v1.0.0/), to use a different directory, change the `previewDir` config in `package.json` (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
+| `npm run build` | for production-ready code, adds minification |
+| `npm run preview:push` | copies `public/` to staging server to a folder in `interactives/preview/2016/v<version>/` with the package's name, to use a different directory, change the `previewDir` config in `package.json` (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
 | `npm run preview:push:patch` | same as preview:push except runs `npm version patch` |
 | `npm run preview:open` | open most recent preview in browser |
 | `npm run stage:connect` | connect to staging server via ssh (must have RSA_KEY, STAGE_NAME, and STAGE_IP defined as environment variables ) |
-| `npm run stage:push` | push update to staging directory (default: projects/2016 ) |
+| `npm run stage:push` | push update to staging directory, overwrites old files (default: projects/2016 ) |
 | `npm run stage:commit` | commit staging changes to git |
 | `npm run stage:open` | preview stage in browser |
 | `npm run watch` | watch js and sass files |
@@ -82,3 +84,14 @@ export STAGE_IP="[IP address of staging server]"
 | `npm run minify` | minify js and sass files |
 | `npm run mustache` | Mustache's CLI doesn't add partials recursively. Hack to retrieve all partials, insert package.json's meta data and render HTML to `public/index.html`  |
 | `npm run mini:add` | Swap references to app.js/app.css for app.min.js/app.min.css in public/index.html |
+
+## Troubleshooting
+
+if npm is giving you trouble, run `npm update`. Still trouble? `npm install`. Still giving you hell? remove the `node_modules` directory and `npm install`. Still?? You sure you have the latest version of npm? `sudo npm install npm -g`
+
+Sometimes the livereload server refuses to shut down. You can either remove the livereload script from package.json, or shut down the livereload server manually. In the terminal, run `lsof -n -i4TCP:35729`. Which outputs:
+```
+COMMAND     PID  ...
+node      27594  ...
+```
+kill it: `kill 27594`
