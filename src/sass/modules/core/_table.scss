@@ -1,0 +1,28 @@
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead{
+  border-bottom: 3px solid #333;
+}
+
+th{
+  text-align: right !important;
+  font-weight: 900;
+  font-family: $serif-family;
+}
+
+td{
+  border-bottom: 1px solid #333;
+  line-height: 20px;
+  height: 15px;
+  text-align: right;
+  padding: 10px 10px 10px 0px;
+  width: calc( 50% - 140px );
+  min-width: 110px;
+}
+
+tr.disabled{
+  opacity: 0.6;
+}

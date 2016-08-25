@@ -1,0 +1,72 @@
+.btn{
+  display: inline-block;
+  padding: 10px;
+  background: #fff;
+  border: none;
+  margin: 5px 0;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 2px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.btn.on{
+  color: #fff;
+  background: color(blue,0.75);
+}
+
+.btn:hover{
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3),
+  0px 1px 1px 0 rgba(0,0,0,0.2),
+  0px 2px 1px -1px rgba(0,0,0,0.2);
+}
+
+.btn.lg{
+  width: calc(100% - 20px);
+}
+
+.btn.md{
+  margin: 5px 1px;
+  width: calc(50% - 22px );
+}
+
+.btn.sm{
+  padding: 5px;
+  margin: 1px;
+  width: calc(25% - 12px);
+}
+
+.btn.xs{
+  padding: 5px;
+  margin: 1px;
+  width: calc(20% - 12px);
+}
+
+.btn:before{
+  content: ' ';
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top:-10px;
+  margin-left:-10px;
+  opacity: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  transform: scale(0) translateZ(0);
+  pointer-events: none;
+}
+
+.btn.on:before{
+  background: rgba(255,255,255,0.2);
+}
+
+.btn:active:before{
+  opacity: 1;
+  transform: scale(20) translateZ(0);
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+
+}
