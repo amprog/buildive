@@ -19,7 +19,7 @@
     "minify": "uglifyjs public/app.js -o public/app.min.js & minify public/app.css -o public/app.min.css ",
     "mini:add": "sed -i '' 's/\"app.js\"/\"app.min.js\"/g; s/\"app.css\"/\"app.min.css\"/g' public/index.html",
     "sass": "node-sass src/sass/index.scss public/app.css",
-    "mustache": "find src/views/partials -name '*.mustache' | xargs -I {} echo '-p' {} ' ' | xargs -I {} sh -c 'eval mustache {} package.json src/views/index.mustache > public/index.html'",
+    "mustache": "PARTIALS=`find src/views/partials -name '*.mustache' | xargs -I {} echo '-p' {} ' ' | tr -d \"\n\"`; mustache $PARTIALS package.json src/views/index.mustache > public/index.html",
     "preview:push": "npm version minor && npm run preview:mkdir && npm run preview:scp && npm run preview:open",
     "preview:push:patch": "npm version patch && npm run preview:mkdir && npm run preview:scp && npm run preview:open",
     "preview:mkdir": "npm run stage:connect -- 'mkdir -p /var/www/interactives/$npm_package_config_previewDir/$npm_package_name'",
