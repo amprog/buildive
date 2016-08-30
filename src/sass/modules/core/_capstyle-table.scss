@@ -1,0 +1,151 @@
+//use typekit with id: zga2etx
+$blue: rgb(0,82,136);
+$light-blue: rgba(0,82,136,0.08);
+
+.cap-table{
+  padding: 10px;
+  width: calc(100% - 20px);
+  font-size: 13pt;
+  color: #231F20;
+//  background: #f2f2f2;
+}
+
+.cap-table .figure-number,
+.cap-table .hed,
+.cap-table .dek{
+  color: $blue;
+}
+
+.cap-table .figure-number{
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-family: "myriad-pro-semiextended" !important;
+  font-weight: 600;
+}
+
+.cap-table .hed{
+  font-size: 1.4em;
+  font-family: "myriad-pro-semi-condensed" !important;
+  font-weight: 600;
+  max-width: 80%;
+}
+
+.cap-table .dek{
+  font-size: 1.2em;
+  font-family: "myriad-pro-semi-condensed" !important;
+  font-weight: 400;
+  margin-bottom: 1em;
+  max-width: 90%;
+}
+
+.cap-table .source{
+  font-size: 0.8em;
+  display: block;
+  padding-top: 0.4em;
+}
+
+.cap-table table{
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $blue;
+}
+
+.cap-table th{
+  font-size: 1em;
+  line-height: 1.2em;
+  text-align: center;
+  border-bottom: 1pt solid $blue;
+  border-top: 1pt solid $blue;
+  color: $blue;
+  font-family: "myriad-pro-semi-condensed" !important;
+  font-weight: 600;
+  padding: 0.6em 0;
+}
+
+.cap-table tbody tr{
+  text-align: center;
+  color: #231F20;
+  font-family: "myriad-pro-semi-condensed" !important;
+  font-weight: 400;
+  padding: 0.5em 00.5em 0;
+}
+
+.cap-table tbody td{
+  padding: 0.35em 0px 0.35em 0px;
+  max-height: 1.6em;
+}
+
+.cap-table tbody tr:nth-child(odd) {
+
+
+}
+
+.cap-table tbody tr:nth-child(even) {
+  //background: $light-blue;
+}
+
+.search{
+  margin: 1.5em 0;
+  position: relative;
+}
+
+.search input{
+  background: none;
+  line-height: 1.6em;
+  min-width: 80%;
+  font-size: 1.4em;
+  color: $blue;
+  font-weight: 600;
+  font-family: "myriad-pro-semi-condensed" !important;
+
+  padding: 0.25em 0 0.25em 1.4em;
+  margin: 0;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid $blue;
+
+}
+
+.search i{
+  position: absolute;
+  left: 0;
+  line-height: 2em;
+  font-size: 1.4em;
+}
+
+::-webkit-input-placeholder {
+   font-weight: 100;
+   opacity: 0.25;
+}
+
+:-moz-placeholder {
+  font-weight: 100;
+   opacity: 0.25;
+}
+
+::-moz-placeholder {
+  font-weight: 100;
+   opacity: 0.25;
+}
+
+:-ms-input-placeholder {
+  font-weight: 100;
+   opacity: 0.25;
+}
+
+.fa-search{
+  color: $blue;
+}
+
+@media (max-width:650px){
+  .cap-table{
+    font-size: 10pt;
+  }
+}
+
+@media (max-width:500px){
+  .cap-table{
+    font-size: 6pt;
+  }
+}

@@ -26,15 +26,15 @@ export STAGE_IP="[IP address of staging server]"
 - Start local server / livereload : `npm start`
 - Use [CommonJS](http://requirejs.org/docs/commonjs.html) syntax to import scripts into `src/js/index.js`
 - @import .scss files into `src/sass/index.scss`
-- Using mustache's partials syntax (`{{> partial_name }}`), add partials to `src/views/index.mustache` (note: partials must have a unique filenames across `partials/` and have .mustache extension)
+- Store mustache partials in `partials` directory. Using mustache's partials syntax (`{{> partial_name }}`), add partials to `src/views/index.mustache` (note: partials must have a unique filenames across `partials/` and have .mustache extension)
 
 ### Build
-- for production-ready builds: `npm run build`
+- for production-ready builds: `npm run build`. This will minify your javascript and css and swap out .js/.css references in public/index.html for .min.js and .min.css references.
 
 ### Push Updates
 
 - for testing and sharing internally, use npm `preview` scripts which copy files to `/preview/2016/` on staging server, outside of the git working tree: `npm run preview:push`
-  - *note:* the preview directory will maintain versions (e.g `/previews/2016/buildive/v1.0.1/`)
+  - *note:* the preview scripts maintain versions (e.g `/previews/2016/buildive/v1.0.1/`)
 - when ready to push to production after building: `npm run stage:push`
 
 The current process for going live with interactives is to load files to the staging server (you can do this manually via FTP using CyberDuck or Filezilla, if you prefer or just run `npm run stage:push`), then adding the changes to the git repo on the staging server (`npm run stage:commit` or ssh into staging server and add it manually with git). You then put in a request to webtech via Slack, and someone on the team will pull down your changes onto the production interactive server.
@@ -86,11 +86,16 @@ The current process for going live with interactives is to load files to the sta
 | `npm run mustache` | Mustache's CLI doesn't add partials recursively. Hack to retrieve all partials, insert package.json's meta data and render HTML to `public/index.html`  |
 | `npm run mini:add` | Swap references to app.js/app.css for app.min.js/app.min.css in public/index.html |
 
+
+## Spitshine
+
+Make sure you get your meta tags right. `package.json` has a few properties that will fill in the meta data for the image, title and description tags for (Open Graph)[http://ogp.me/]. Don't forget to snap a nice screenshot of your interactive and save it as /public/images/card.png/
+
 ## Troubleshooting
 
 if npm is giving you trouble, run `npm update`. Still trouble? `npm install`. Still giving you hell? remove the `node_modules` directory and `npm install`. Still?? You sure you have the latest version of npm? `sudo npm install npm -g`
 
-Sometimes the livereload server refuses to shut down. You can either remove the livereload script from package.json, or shut down the livereload server manually. In the terminal, run `lsof -n -i4TCP:35729`. Which outputs:
+Sometimes the livereload server refuses to shut down. You can either remove the livereload script from package.json, or shut down the livereload server manually when it acts up. In the terminal, run `lsof -n -i4TCP:35729`. Which outputs:
 ```
 COMMAND     PID  ...
 node      27594  ...
