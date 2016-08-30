@@ -48,6 +48,7 @@ The current process for going live with interactives is to load files to the sta
 - a direct child of main or header with a `wrap` class will get 10px left/right padding and remove any floats.
 - for titles, use `<h1 class="hed"></h1>` and `<h2 class="dek"></h2>`
 - if you don't want to use default CAP styles, remove `modules/core/style` import from index.scss
+- most interactives use [Adobe's Typekit](https://typekit.com/). Headers use [Adelle Condensed](https://typekit.com/fonts/adelle-condensed) and body uses [Myriad Pro Semi Condensed](https://typekit.com/fonts/myriad-pro-semi-condensed).
 
 ### Sass helpers
 
